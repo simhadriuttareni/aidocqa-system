@@ -1,76 +1,92 @@
+# 🤖 AI-Powered Document & Multimedia Q&A System
 
-# AI-Powered Document & Multimedia Q&A System
+An AI-powered full-stack application that allows users to upload documents and interact with them through a real-time conversational chatbot interface using Retrieval-Augmented Generation (RAG).
 
-An AI-powered full-stack application that allows users to upload documents and interact with them through a chatbot interface using Retrieval-Augmented Generation (RAG).
-
-The system extracts content from uploaded files, processes and stores document chunks, and generates context-aware responses using LLM-based semantic retrieval.
-
----
-
-# Features
-
-- PDF document upload and processing
-- AI-powered conversational chatbot
-- Context-aware question answering using RAG
-- Automatic document chunking and storage
-- Document summarization
-- PostgreSQL-based persistence layer
-- React-based responsive frontend
-- Spring Boot REST API backend
-- Modular and scalable backend architecture
+The system processes uploaded documents, retrieves relevant contextual information, and generates intelligent conversational AI responses through a chatbot-style interface similar to modern AI assistants.
 
 ---
 
-# Tech Stack
+# ✨ Features
 
-## Backend
-- Java 17
-- Spring Boot 3.5
-- Spring Data JPA
-- PostgreSQL
-- Apache PDFBox
-- WebFlux
-
-## Frontend
-- React
-- Axios
-- CSS
-
-## AI & Processing
-- RAG-based retrieval pipeline
-- Embedding-based semantic context flow
-- LLM integration for conversational responses
+- 📄 PDF document upload and processing
+- 💬 Real-time chatbot-style conversation interface
+- 🧠 Context-aware AI responses using RAG
+- 📚 Intelligent document chunking and retrieval
+- 📝 AI-generated document summaries
+- ⚡ Interactive React frontend experience
+- 🗂️ PostgreSQL-based persistence layer
+- 🔗 Spring Boot REST API backend
+- 🏗️ Clean layered architecture
+- 🐳 Docker-ready setup
 
 ---
 
-# System Architecture
+# 🖥️ Chatbot Interface Preview
+
+The application provides a real-time conversational chatbot experience similar to modern AI assistants.
+
+Users can:
+- Upload documents
+- Select previously uploaded files
+- Ask natural language questions
+- Receive intelligent AI-generated responses
+- Interact through a clean chat-style interface
+
+The frontend is designed to mimic modern conversational AI systems with contextual responses and seamless document interaction.
+
+---
+
+# 🏗️ System Workflow
 
 ```text
-Upload File
-    ↓
-Text Extraction
-    ↓
-Chunking
-    ↓
-Store Chunks in PostgreSQL
-    ↓
-User Question
-    ↓
-Retrieve Relevant Chunks
-    ↓
+Upload Document
+      ↓
+Extract Text Content
+      ↓
+Chunk & Store Data
+      ↓
+User Asks Question
+      ↓
+Retrieve Relevant Context
+      ↓
 Generate AI Response
-    ↓
-Return Context-Aware Answer
+      ↓
+Display Conversational Reply in Chat UI
 ````
 
 ---
 
-# Project Structure
+# 🛠️ Tech Stack
+
+## Backend
+
+* Java 17
+* Spring Boot 3.5
+* Spring Data JPA
+* PostgreSQL
+* Apache PDFBox
+* Spring WebFlux
+
+## Frontend
+
+* React
+* Axios
+* CSS
+
+## AI & Processing
+
+* Retrieval-Augmented Generation (RAG)
+* Embedding-based contextual retrieval
+* LLM integration for conversational responses
+
+---
+
+# 📂 Project Structure
 
 ```text
 aidocqa-system/
 │
-├── backend/
+├── aidocqa/                     # Spring Boot Backend
 │   ├── controller/
 │   ├── service/
 │   ├── repository/
@@ -81,42 +97,82 @@ aidocqa-system/
 │   └── config/
 │
 ├── frontend/
-│   ├── components/
-│   ├── services/
-│   └── src/
+│   └── aidocqa-frontend/
+│       ├── src/
+│       ├── public/
+│       └── package.json
 │
 └── README.md
 ```
 
 ---
 
-# API Endpoints
+# 🚀 Getting Started
 
-## Upload Document
+## Prerequisites
 
-```http
-POST /api/documents/upload
-```
+Make sure you have:
 
-Uploads and processes a document.
-
----
-
-## Chat with Document
-
-```http
-POST /api/chat
-```
-
-Accepts user questions and returns AI-generated responses based on uploaded document content.
+* Java 17+
+* Node.js
+* PostgreSQL
+* Maven
+* Groq/OpenAI API Key
 
 ---
 
-# Setup Instructions
+# ⚙️ Backend Setup
 
-## Backend
+## 1. Clone Repository
 
 ```bash
+git clone https://github.com/simhadriuttareni/aidocqa-system.git
+cd aidocqa-system
+```
+
+---
+
+## 2. Create Database
+
+```sql
+CREATE DATABASE aidocqa;
+```
+
+---
+
+## 3. Configure Database
+
+Update:
+
+```text
+src/main/resources/application.properties
+```
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/aidocqa
+spring.datasource.username=postgres
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+---
+
+## 4. Configure API Key
+
+### Windows PowerShell
+
+```powershell
+$env:GROQ_API_KEY="your_api_key"
+```
+
+---
+
+## 5. Run Backend
+
+```bash
+cd aidocqa
 mvn clean install
 mvn spring-boot:run
 ```
@@ -129,9 +185,12 @@ http://localhost:8080
 
 ---
 
-## Frontend
+# 🎨 Frontend Setup
+
+Open a new terminal:
 
 ```bash
+cd frontend/aidocqa-frontend
 npm install
 npm start
 ```
@@ -144,60 +203,116 @@ http://localhost:3000
 
 ---
 
-# Database Configuration
+# 💬 Chatbot Experience
 
-Update:
+The application provides a conversational chatbot interface where users can interact naturally with uploaded documents.
 
-```text
-application.properties
+Example questions:
+
+* “What is this document about?”
+* “Summarize the key points”
+* “Explain the main concepts”
+* “What technologies are mentioned?”
+
+The AI retrieves relevant document context and generates human-like conversational responses directly in the frontend chat interface.
+
+---
+
+# 📡 API Endpoints
+
+## Upload Document
+
+```http
+POST /api/documents/upload
 ```
 
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/aidocqa
-spring.datasource.username=postgres
-spring.datasource.password=your_password
+Uploads and processes documents for AI interaction.
+
+---
+
+## Chat with AI
+
+```http
+POST /api/chat/ask
 ```
 
-Create database:
+Accepts natural language questions from the frontend chat interface and returns intelligent conversational AI responses based on uploaded document content.
 
-```sql
-CREATE DATABASE aidocqa;
+---
+
+## Get Uploaded Documents
+
+```http
+GET /api/documents
+```
+
+Returns all uploaded documents.
+
+---
+
+# 🧪 Running Tests
+
+## Backend
+
+```bash
+mvn test
+```
+
+## Frontend
+
+```bash
+npm test
 ```
 
 ---
 
-# Key Highlights
+# 🐳 Docker Support
 
-* Built using clean layered architecture
-* Uses semantic retrieval workflow for contextual answers
-* Backend designed with modular service separation
-* Frontend provides real-time chatbot interaction
-* Supports scalable document ingestion flow
+Run the entire application using Docker Compose:
+
+```bash
+docker-compose up --build
+```
 
 ---
 
-# Future Improvements
+# 🔥 Key Highlights
 
-* Audio and video transcription support
+* Implements Retrieval-Augmented Generation (RAG)
+* Real-time chatbot interaction experience
+* Conversational AI workflow similar to modern AI assistants
+* Full-stack integration with React and Spring Boot
+* Modular and scalable backend architecture
+* Intelligent semantic retrieval pipeline
+
+---
+
+# 🚀 Future Improvements
+
+* Audio & video transcription support
 * Timestamp-based media navigation
-* Redis caching
 * Vector database integration
 * JWT authentication
 * Streaming AI responses
+* Redis caching
 
 ---
 
 
 
-# Repository
-
-GitHub Repository:
+# 🔗 GitHub Repository
 
 [https://github.com/simhadriuttareni/aidocqa-system](https://github.com/simhadriuttareni/aidocqa-system)
 
 ---
 
-# Author
+# 👨‍💻 Author
 
 Simhadri Uttareni
+
+---
+
+# 📌 Final Note
+
+This project was built as part of the SDE-1 Assignment for PanScience Innovations and focuses on building a real-world AI-powered conversational document interaction system using modern backend, frontend, and AI engineering concepts.
 
